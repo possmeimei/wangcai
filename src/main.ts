@@ -8,6 +8,7 @@ import Nav from "@/components/Nav.vue";
 Vue.config.productionTip = false
 Vue.component('Nav', Nav)
 
+
 new Vue({
     router,
     store,
