@@ -17,7 +17,7 @@
       <div>
         <label class="notes">
           <span class="name">备注</span>
-          <input type="text"/>
+          <input type="text" placeholder="写点备注吧！"/>
         </label>
       </div>
       <ul class="types">
@@ -55,7 +55,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 .tags {
   padding: 16px;
   font-size: 14px;
@@ -78,6 +77,45 @@ export default {
       background: transparent;
       border: none;
       border-bottom: 1px solid;
+    }
+  }
+}
+.notes{
+  background: #f5f5f5;
+  display: block;
+  font-size: 14px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  > .name{
+    padding: 10px;
+  }
+  > input{
+    margin-left: 10px;
+    flex-grow: 1;
+    color: #999999;
+  }
+}
+.types{
+  display: flex;
+  background: #c4c4c4;
+  text-align: center;
+  font-size: 24px;
+  > li{
+    width: 50%;
+    height: 64px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    &.selected::after{
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: #333333;
     }
   }
 }
