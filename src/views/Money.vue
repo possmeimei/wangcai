@@ -2,7 +2,7 @@
   <div>
     <layout class-prefix="money">
       <number-pad/>
-      <Types types="types"/>
+      <Types/>
       <Notes/>
       <Tags/>
     </layout>
