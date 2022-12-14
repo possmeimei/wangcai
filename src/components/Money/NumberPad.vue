@@ -51,7 +51,7 @@ export default class NumberPad extends Vue {
     this.output += input;
   }
 
-  remove():void {
+  remove(): void {
     if (this.output.length === 1) {
       this.output = '0';
     } else {
@@ -63,9 +63,9 @@ export default class NumberPad extends Vue {
   //   this.output = '0';
   // }
 
-  // done() {
-  //
-  // }
+  done():void {
+    this.$emit('update:value', this.output);
+  }
 }
 </script>
 <style scoped lang="scss">
