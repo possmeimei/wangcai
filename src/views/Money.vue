@@ -10,14 +10,15 @@
 </template>
 
 <script lang="ts">
-import NumberPad from "@/components/Money/NumberPad.vue";
-import Tags from "@/components/Money/Tags.vue";
-import Notes from "@/components/Money/Notes.vue";
-import Types from "@/components/Money/Types.vue";
+import NumberPad from '@/components/Money/NumberPad.vue';
+import Tags from '@/components/Money/Tags.vue';
+import Notes from '@/components/Money/Notes.vue';
+import Types from '@/components/Money/Types.vue';
+
 export default {
-  name: "Money",
+  name: 'Money',
   components: {Types, Notes, Tags, NumberPad},
-}
+};
 </script>
 <style lang="scss">
 .money-content {
