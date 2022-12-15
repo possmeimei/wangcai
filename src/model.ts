@@ -1,5 +1,3 @@
-import {compileScript} from 'vue/packages/compiler-sfc';
-
 const localStorageKeyName = 'recordList';
 const model = {
     clone(data: RecordItem[] | RecordItem) {
