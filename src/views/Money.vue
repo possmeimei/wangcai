@@ -3,7 +3,7 @@
     <layout class-prefix="money">
       <number-pad @update:value="onUpdateAmount" @submit="saveRecord"/>
       <Types :value.sync="record.type"/>
-      <Notes field-name="备注" placeholder="写点备注吧" @update:value="onUpdateNotes"/>
+      <EditItem field-name="备注" placeholder="写点备注吧" @update:value="onUpdateNotes"/>
       <Tags :data-source.sync="tags" @update:value="onUpdateTags"/>
     </layout>
   </div>
@@ -13,7 +13,7 @@
 import Vue from 'vue';
 import NumberPad from '@/components/Money/NumberPad.vue';
 import Tags from '@/components/Money/Tags.vue';
-import Notes from '@/components/Money/Notes.vue';
+import EditItem from '@/components/Money/EditItem.vue';
 import Types from '@/components/Money/Types.vue';
 import {Component, Watch} from 'vue-property-decorator';
 import recordListModel from '@/models/recordListModel';
@@ -34,7 +34,7 @@ const tagList = tagListModel.fetch();
 
 @Component(
     {
-      components: {Types, Notes, Tags, NumberPad},
+      components: {EditItem, Types, Tags, NumberPad},
     })
 export default class Money extends Vue {
   tags = tagList;

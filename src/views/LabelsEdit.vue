@@ -4,7 +4,8 @@
       <Icon name="arrow-left" />
      <span>编辑标签</span>
     </div>
-    <Notes field-name="标签名" placeholder="请输入标签名"/>
+    <EditItem field-name="标签名" placeholder="请输入标签名"/>
+    <Button>删除标签</Button>
   </Layout>
 </template>
 
@@ -12,9 +13,10 @@
 import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
 import TagListModel from '@/models/tagListModel';
-import Notes from '@/components/Money/Notes.vue';
+import EditItem from '@/components/Money/EditItem.vue';
+import Button from '@/components/Button.vue';
 @Component({
-  components: {Notes}
+  components: {Button, EditItem}
 })
 export default class LabelsEdit extends Vue {
   created() {
