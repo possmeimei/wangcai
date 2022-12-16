@@ -3,7 +3,7 @@
     <layout class-prefix="money">
       <number-pad @update:value="onUpdateAmount" @submit="saveRecord"/>
       <Types :value.sync="record.type"/>
-      <Notes @update:value="onUpdateNotes"/>
+      <Notes field-name="备注" placeholder="写点备注吧" @update:value="onUpdateNotes"/>
       <Tags :data-source.sync="tags" @update:value="onUpdateTags"/>
     </layout>
   </div>
