@@ -6,9 +6,9 @@
       </button>
     </div>
     <ul class="current">
-      <li v-for="tag in dataSource" :key="tag"
+      <li v-for="tag in dataSource" :key="tag.id"
           @click="toggle(tag)"
-          :class="selectedTags.indexOf(tag)>= 0 && 'selected'">{{ tag }}
+          :class="selectedTags.indexOf(tag)>= 0 && 'selected'">{{ tag.name}}
       </li>
     </ul>
   </div>
