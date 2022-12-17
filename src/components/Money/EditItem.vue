@@ -1,6 +1,6 @@
 <template>
   <div>
-    <label class="notes">
+    <label class="EditItem">
       <span class="name">{{ this.fieldName }}</span>
       <input type="text"
              v-model="value"
@@ -27,9 +27,7 @@ export default class EditItem extends Vue {
 </script>
 
 <style scoped lang="scss">
-.notes {
-  background: #f5f5f5;
-  //display: block;
+.EditItem {
   font-size: 14px;
   padding: 16px;
   display: flex;
