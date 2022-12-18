@@ -4,7 +4,7 @@
       <number-pad @update:value="onUpdateAmount" @submit="saveRecord"/>
       <Types :value.sync="record.type"/>
       <EditItem field-name="备注" placeholder="写点备注吧" @update:value="onUpdateNotes"/>
-      <Tags :data-source.sync="tags" @update:value="onUpdateTags"/>
+      <Tags/>
     </layout>
   </div>
 </template>
@@ -33,17 +33,16 @@ import store from '@/store/index2';
 @Component(
     {
       components: {EditItem, Types, Tags, NumberPad},
+      computed: {
+        recordList() {
+          return store.recordList;
+        }
+      }
     })
 export default class Money extends Vue {
-  tags = store.tagList;
-  recordList = store.recordList;
   record: RecordItem = {
     tags: [], notes: '', type: '-', amount: 0
   };
-
-  onUpdateTags(value: string[]): void {
-    this.record.tags = value;
-  }
 
   onUpdateNotes(value: string): void {
     this.record.notes = value;
@@ -54,7 +53,7 @@ export default class Money extends Vue {
   }
 
   saveRecord(): void {
-    store.createRecord(this.record)
+    store.createRecord(this.record);
   }
 }
 </script>
