@@ -16,6 +16,8 @@ import Tags from '@/components/Money/Tags.vue';
 import EditItem from '@/components/Money/EditItem.vue';
 import Types from '@/components/Money/Types.vue';
 import {Component} from 'vue-property-decorator';
+import store from '@/store/index2';
+
 
 //版本数据迁移
 // const version = window.localStorage.getItem('version') || '0';
@@ -33,8 +35,8 @@ import {Component} from 'vue-property-decorator';
       components: {EditItem, Types, Tags, NumberPad},
     })
 export default class Money extends Vue {
-  tags = window.tagList;
-  recordList = window.recordList;
+  tags = store.tagList;
+  recordList = store.recordList;
   record: RecordItem = {
     tags: [], notes: '', type: '-', amount: 0
   };
@@ -52,7 +54,7 @@ export default class Money extends Vue {
   }
 
   saveRecord(): void {
-    window.createRecord(this.record)
+    store.createRecord(this.record)
   }
 }
 </script>
