@@ -1,4 +1,4 @@
-function clone(data: never) {
+function clone(data: any) {
     return JSON.parse(JSON.stringify(data));
 }
 
