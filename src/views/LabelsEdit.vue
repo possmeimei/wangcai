@@ -19,41 +19,33 @@
 <script lang="ts">
 import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
-import TagListModel from '@/models/tagListModel';
 import EditItem from '@/components/Money/EditItem.vue';
 import Button from '@/components/Button.vue';
-import tagListModel from '@/models/tagListModel';
 
 @Component({
   components: {Button, EditItem}
 })
 export default class LabelsEdit extends Vue {
-  tag?: { id: string, name: string } = undefined;
+  tag = window.findTag(this.$route.params.id);
 
   created() {
-    const id = this.$route.params.id;
-    TagListModel.fetch();
-    const tags = TagListModel.data;
-    const tag = tags.filter(tag => tag.id === id)[0];
-    if (tag) {
-      this.tag = tag;
-    } else {
+    if (!this.tag) {
       this.$router.replace('/404');
     }
   }
 
   updateTag(name: string) {
     if (this.tag) {
-      tagListModel.update(this.tag.id, name);
+      window.updateTag(this.tag.id, name);
     }
   }
 
   removeTag() {
     if (this.tag) {
-      if (tagListModel.remove(this.tag.id)) {
+      if (window.removeTag(this.tag.id)) {
         this.$router.back();
-      }else {
-        window.alert('删除失败')
+      } else {
+        window.alert('删除失败');
       }
     }
   }
