@@ -21,14 +21,14 @@ import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
 import EditItem from '@/components/Money/EditItem.vue';
 import Button from '@/components/Button.vue';
-import store from '@/store/index2';
 
 @Component({
   components: {Button, EditItem}
 })
 export default class LabelsEdit extends Vue {
-  tag = store.findTag(this.$route.params.id);
-
+  // TODO
+  // tag = store.findTag(this.$route.params.id);
+  tag?: Tag = undefined
   created() {
     if (!this.tag) {
       this.$router.replace('/404');
@@ -37,17 +37,20 @@ export default class LabelsEdit extends Vue {
 
   updateTag(name: string) {
     if (this.tag) {
-      store.updateTag(this.tag.id, name);
+      // TODO
+      // store.updateTag(this.tag.id, name);
     }
   }
 
   removeTag() {
     if (this.tag) {
-      if (store.removeTag(this.tag.id)) {
-        this.$router.back();
-      } else {
-        window.alert('删除失败');
-      }
+      // TODO
+      return
+      // if (store.removeTag(this.tag.id)) {
+      //   this.$router.back();
+      // } else {
+      //   window.alert('删除失败');
+      // }
     }
   }
 
