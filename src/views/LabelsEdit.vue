@@ -23,13 +23,15 @@ import EditItem from '@/components/Money/EditItem.vue';
 import Button from '@/components/Button.vue';
 
 @Component({
-  components: {Button, EditItem}
+  components: {Button, EditItem},
 })
 export default class LabelsEdit extends Vue {
-  // TODO
-  // tag = store.findTag(this.$route.params.id);
-  tag?: Tag = undefined
+  get tag(){
+    return this.$store.state.currentTag;
+  }
   created() {
+    const id = this.$route.params.id
+    this.$store.commit('setCurrentTag',id)
     if (!this.tag) {
       this.$router.replace('/404');
     }
@@ -45,7 +47,7 @@ export default class LabelsEdit extends Vue {
   removeTag() {
     if (this.tag) {
       // TODO
-      return
+      return;
       // if (store.removeTag(this.tag.id)) {
       //   this.$router.back();
       // } else {
