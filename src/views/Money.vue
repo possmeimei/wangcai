@@ -16,8 +16,6 @@ import Tags from '@/components/Money/Tags.vue';
 import EditItem from '@/components/Money/EditItem.vue';
 import Types from '@/components/Money/Types.vue';
 import {Component} from 'vue-property-decorator';
-import store from '@/store/index';
-
 
 //版本数据迁移
 // const version = window.localStorage.getItem('version') || '0';
@@ -33,13 +31,11 @@ import store from '@/store/index';
 @Component(
     {
       components: {EditItem, Types, Tags, NumberPad},
-      computed: {
-        recordList() {
-          return this.$store.state.recordList;
-        }
-      }
     })
 export default class Money extends Vue {
+  get recordList(){
+    return this.$store.state.recordList;
+  }
   record: RecordItem = {
     tags: [], notes: '', type: '-', amount: 0
   };
