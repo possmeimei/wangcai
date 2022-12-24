@@ -8,6 +8,11 @@
         <br>
         interval:{{ interval }}
       </div>
+      <div>
+        <ol>
+          <li v-for="item in result" :key="item.id">{{ item }}</li>
+        </ol>
+      </div>
     </layout>
   </div>
 </template>
@@ -18,10 +23,28 @@ import {Component} from 'vue-property-decorator';
 import Tabs from '@/components/Tabs.vue';
 import intervalList from '@/constants/intervalList';
 import typeList from '@/constants/typeList';
+
 @Component({
   components: {Tabs},
 })
 export default class Statistics extends Vue {
+  get recordList() {
+    return this.$store.state.recordList;
+  }
+
+  get result() {
+    const {recordList} = this;
+    const hashTable = {};
+    for (let i = 0; i < recordList.length; i++) {
+      console.log(recordList[i].createdAt);
+    }
+    return [];
+  }
+
+  mounted() {
+    this.$store.commit('fetchRecords');
+  }
+
   type = '-';
   interval = 'day';
   intervalList = intervalList;
@@ -32,16 +55,19 @@ export default class Statistics extends Vue {
 <style lang="scss" scoped>
 @import "~@/assets/style/helper.scss";
 
-::v-deep .type-tabs-item {
-  background: #c4c4c4;
+::v-deep {
+  .type-tabs-item {
+    background: #c4c4c4;
 
-  &.selected {
-    background: $color-highlight;
-    color: white;
+    &.selected {
+      background: $color-highlight;
+      color: white;
+    }
   }
-}
-::v-deep .interval-tabs-item{
-  height: 36px;
-  border: 1px solid white;
+
+  .interval-tabs-item {
+    height: 36px;
+    border: 1px solid white;
+  }
 }
 </style>
