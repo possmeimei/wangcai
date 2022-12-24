@@ -2,7 +2,7 @@
   <div>
     <layout class-prefix="money">
       <number-pad @update:value="onUpdateAmount" @submit="saveRecord"/>
-      <Types :value.sync="record.type"/>
+      <Tabs :data-source="typeList" :value.sync="record.type"/>
       <EditItem field-name="备注" placeholder="写点备注吧" @update:value="onUpdateNotes"/>
       <Tags/>
     </layout>
@@ -16,6 +16,8 @@ import Tags from '@/components/Money/Tags.vue';
 import EditItem from '@/components/Money/EditItem.vue';
 import Types from '@/components/Money/Types.vue';
 import {Component} from 'vue-property-decorator';
+import Tabs from '@/components/Tabs.vue';
+import typeList from '@/constants/typeList';
 
 //版本数据迁移
 // const version = window.localStorage.getItem('version') || '0';
@@ -30,18 +32,22 @@ import {Component} from 'vue-property-decorator';
 
 @Component(
     {
-      components: {EditItem, Types, Tags, NumberPad},
+      components: {Tabs, EditItem, Types, Tags, NumberPad},
     })
 export default class Money extends Vue {
-  get recordList(){
+  get recordList() {
     return this.$store.state.recordList;
   }
+
+  typeList = typeList;
   record: RecordItem = {
     tags: [], notes: '', type: '-', amount: 0
   };
-  created(){
-    this.$store.commit('fetchRecords')
+
+  created() {
+    this.$store.commit('fetchRecords');
   }
+
   onUpdateNotes(value: string): void {
     this.record.notes = value;
   }
@@ -51,7 +57,7 @@ export default class Money extends Vue {
   }
 
   saveRecord(): void {
-    this.$store.commit('createRecord',this.record);
+    this.$store.commit('createRecord', this.record);
   }
 }
 </script>
