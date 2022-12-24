@@ -14,7 +14,6 @@ import Vue from 'vue';
 import NumberPad from '@/components/Money/NumberPad.vue';
 import Tags from '@/components/Money/Tags.vue';
 import EditItem from '@/components/Money/EditItem.vue';
-import Types from '@/components/Money/Types.vue';
 import {Component} from 'vue-property-decorator';
 import Tabs from '@/components/Tabs.vue';
 import typeList from '@/constants/typeList';
@@ -32,7 +31,7 @@ import typeList from '@/constants/typeList';
 
 @Component(
     {
-      components: {Tabs, EditItem, Types, Tags, NumberPad},
+      components: {Tabs, EditItem, Tags, NumberPad},
     })
 export default class Money extends Vue {
   get recordList() {
