@@ -3,23 +3,18 @@
     <layout>
       <Tabs class-prefix="type" :data-source="typeList" :value.sync="type"/>
       <Tabs class-prefix="interval" :data-source="intervalList" :value.sync="interval"/>
-      <div>
-        type:{{ type }}
-        <br>
-        interval:{{ interval }}
-      </div>
-      <div>
-        <ol>
-          <li v-for="(group,index) in result" :key="index">
-            <h3>{{group.title}}</h3>
-            <ol>
-              <li v-for="item in group.items" :key="item.id">
-                {{item.amount}}{{item.createdAt}}
-              </li>
-            </ol>
-          </li>
-        </ol>
-      </div>
+      <ol>
+        <li v-for="(group,index) in result" :key="index">
+          <h3 class="title">{{ group.title }}</h3>
+          <ol>
+            <li v-for="item in group.items" :key="item.id" class="record">
+              <span>{{ tagString(item.tags) }}</span>
+              <span class="notes">{{ item.notes }}</span>
+              <span>￥{{ item.amount }}</span>
+            </li>
+          </ol>
+        </li>
+      </ol>
     </layout>
   </div>
 </template>
@@ -35,17 +30,21 @@ import typeList from '@/constants/typeList';
   components: {Tabs},
 })
 export default class Statistics extends Vue {
+  tagString(tags: Tag[]) {
+    return tags.length === 0 ? 'null' : tags.join(',');
+  }
+
   get recordList() {
     return (this.$store.state as RootState).recordList;
   }
 
   get result() {
     const {recordList} = this;
-    type hashTableValue = {title:string,items:RecordItem[]}
-    const hashTable: { [key: string]: hashTableValue} = {};
+    type hashTableValue = { title: string, items: RecordItem[] }
+    const hashTable: { [key: string]: hashTableValue } = {};
     for (let i = 0; i < recordList.length; i++) {
       const [date, time] = recordList[i].createdAt!.split('T');
-      hashTable[date] = hashTable[date] || {title:date,items:[]};
+      hashTable[date] = hashTable[date] || {title: date, items: []};
       hashTable[date].items.push(recordList[i]);
     }
     return hashTable;
@@ -79,5 +78,28 @@ export default class Statistics extends Vue {
     height: 36px;
     border: 1px solid white;
   }
+}
+
+%item {
+  padding: 0 16px;
+  min-height: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  @extend %item
+}
+
+.record {
+  @extend %item;
+  background: white;
+}
+.notes{
+  color: #999999;
+  font-size: 14px;
+  margin-right: auto;
+  margin-left: 8px;
 }
 </style>
